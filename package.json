@@ -14,5 +14,8 @@
     "url": "(https://github.com/elsagrufstedt/testing-with-jest)"
   },
   "author": "Elsipelsi",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "underscore": "^1.13.6"
+  }
 }
