@@ -29,5 +29,5 @@ test('size returns the correct size of the stack', () => {
     stack.pop();
 
     // Verifiera att storleken minskar med 1
-    expect(stack.peek()).toBe(5); // Medvetet fel
+    expect(stack.peek()).toBe(2);
 });

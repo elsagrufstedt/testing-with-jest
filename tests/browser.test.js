@@ -44,7 +44,7 @@ describe('Clicking "Pusha till stacken"', () => {
 
 		// Kontrollera att elementet visas på toppen av stacken
 		const topOfStack = await driver.findElement(By.id('top_of_stack')).getText();
-		expect(topOfStack).not.toBe('Test element'); //Medvetet fel
+		expect(topOfStack).toBe('Test element');
 	});
 
 });
