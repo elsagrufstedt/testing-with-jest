@@ -3,7 +3,9 @@ require('geckodriver');
 
 const fileUnderTest = 'file://' + __dirname.replace(/ /g, '%20') + '/../dist/index.html';
 const defaultTimeout = 10000;
+exports.defaultTimeout = defaultTimeout;
 let driver;
+exports.driver = driver;
 jest.setTimeout(1000 * 60 * 5); // 5 minuter
 
 // Det här körs innan vi kör testerna för att säkerställa att Firefox är igång
@@ -14,8 +16,8 @@ console.log(fileUnderTest);
 });
 
 // Allra sist avslutar vi Firefox igen
-afterAll(async() => {
-    await driver.quit();
+afterAll(async () => {
+	await driver.quit();
 }, defaultTimeout);
 
 test('The stack should be empty in the beginning', async () => {
@@ -31,4 +33,18 @@ describe('Clicking "Pusha till stacken"', () => {
 		await alert.sendKeys("Bananer");
 		await alert.accept();
 	});
+
+	// Mitt test
+	test('Add element to stack via web page', async () => {
+		// Lägg till ett element i stacken
+		const pushButton = await driver.findElement(By.id('push'));
+		await pushButton.click();
+		await driver.switchTo().alert().sendKeys('Test element');
+		await driver.switchTo().alert().accept();
+
+		// Kontrollera att elementet visas på toppen av stacken
+		const topOfStack = await driver.findElement(By.id('top_of_stack')).getText();
+		expect(topOfStack).not.toBe('Test element'); //Medvetet fel
+	});
+
 });
